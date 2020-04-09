@@ -1,6 +1,8 @@
 const apiKey = '1837d58ad4babc15031ecd3ca5048c5a';
-const cityInput = document.querySelector('.cityInput');
-const searchBtn = document.querySelector('.searchBtn');
+const cityInput = document.querySelector('.city-input');
+const searchBtn = document.querySelector('.search-btn');
+const errorMsg = document.querySelector('.error-msg');
+const unitsBtn = document.querySelector('.units-btn');
 let cityName = document.querySelector('.city-name');
 let icon = document.querySelector('.weather-icon');
 let temperature = document.querySelector('.temperature');
@@ -15,6 +17,7 @@ let weatherIconId;
 
 searchBtn.addEventListener('click', () => {
     fetchData();
+    document.querySelector('.container').classList.add('bg-box');
 });
 
 function fetchData() {
@@ -35,22 +38,29 @@ function fetchData() {
                 conditions.innerText = data.weather[0].main;
                 weatherIconId = data.weather[0].icon;
                 weatherIcon = `http://openweathermap.org/img/wn/${weatherIconId}@2x.png`;
-                console.log(weather + 'C')
-                console.log('Feels like ' + weatherFeelsLike +'C')
-                console.log(weatherIconId)
-                console.log(weatherIcon)
 
                 displayData();
             })
             .catch((error) => {
                 console.log('Something went wrong');
+                errorMsg.style.display = 'block';
             });
 }
 
-// Display data
+
 function displayData() {
+
+    if (unitsBtn.style.display = 'none') {
+        unitsBtn.style.display = 'block';
+    }
+
+    if (errorMsg.style.display = 'block') {
+        errorMsg.style.display = 'none';
+    }
+
     cityName.innerText = cityInput.value;
     icon.src = weatherIcon;
+    icon.style.display = 'block';
     
 
     if (units === 'metric') {
@@ -61,3 +71,13 @@ function displayData() {
         feelsLike.innerText = `Feels like ${weatherFeelsLike} F`;
     }
 }
+
+unitsBtn.addEventListener('click', () => {
+    if (units === 'metric') {
+        units = 'imperial';
+        fetchData();
+    } else {
+        units = 'metric';
+        fetchData();
+    }
+});
