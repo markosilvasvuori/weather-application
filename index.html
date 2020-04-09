@@ -2,23 +2,34 @@
 <html>
     <head>
         <title>Weather App</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
-        <div class="search">
-            <input class="cityInput" type="text" placeholder="Search city...">
-            <button class="searchBtn" type="button">Search</button>
-        </div> <!-- /.search -->
+        <div class="wrapper">
+            <h1>Weather Now</h1>
+            <div class="search">
+                <input class="city-input" type="text" placeholder="Search city...">
+                <button class="search-btn" type="button">Search</button>
+            </div> <!-- /.search -->
 
-        <div class="container">
-            <h2 class="city-name"></h2>
-            <ul>
-                <li><img class="weather-icon" src="" alt="Weather icon"></li>
-                <li class="temperature"></li>
-                <li class="feels-like"></li>
-                <li class="conditions"></li>
-            </ul>
-        </div> <!-- /.container -->
+            <div class="container">
+                <span class="error-msg">Something went wrong</span>
+                <h2 class="city-name"></h2>
+                <ul>
+                    <li><img class="weather-icon" src="" alt="Weather icon"></li>
+                    <li class="temperature"></li>
+                    <li class="feels-like"></li>
+                    <li class="conditions"></li>
+                </ul>
+                <button class="units-btn" type="button">Change Units</button>
+            </div> <!-- /.container -->
+        </div> <!-- /.wrapper -->
+
+        <footer>
+            <span>&copy; <a href="https://markosilvasvuori.com/" target="_blank">Marko Silvasvuori</a> 2020</span>
+        </footer>
 
         <script src="js/main.js"></script>
     </body>
