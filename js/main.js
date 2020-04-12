@@ -22,7 +22,7 @@ searchBtn.addEventListener('click', () => {
 
 function fetchData() {
     city = cityInput.value;
-    let apiCall = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
+    let apiCall = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
 
     fetch(apiCall)
         .then((response) => {
@@ -37,7 +37,7 @@ function fetchData() {
                 weatherFeelsLike = data.main.feels_like;
                 conditions.innerText = data.weather[0].main;
                 weatherIconId = data.weather[0].icon;
-                weatherIcon = `http://openweathermap.org/img/wn/${weatherIconId}@2x.png`;
+                weatherIcon = `https://openweathermap.org/img/wn/${weatherIconId}@2x.png`;
 
                 displayData();
             })
@@ -72,12 +72,19 @@ function displayData() {
     }
 }
 
+// Convert C to F / F to C
 unitsBtn.addEventListener('click', () => {
     if (units === 'metric') {
         units = 'imperial';
-        fetchData();
+        weather = (weather * 1.8) + 32;
+        weatherFeelsLike = (weatherFeelsLike * 1.8) + 32;
+        temperature.innerText = `${weather.toFixed(2)} F`;
+        feelsLike.innerText = `Feels like ${weatherFeelsLike.toFixed(2)} F`;
     } else {
         units = 'metric';
-        fetchData();
+        weather = (weather - 32) * 0.5556;
+        weatherFeelsLike = (weatherFeelsLike - 32) * 0.5556;
+        temperature.innerText = `${weather.toFixed(2)} C`;
+        feelsLike.innerText = `Feels like ${weatherFeelsLike.toFixed(2)} C`;
     }
 });
